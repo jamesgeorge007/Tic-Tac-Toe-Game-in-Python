@@ -2,7 +2,7 @@
 # <--Developed by James George--> #
 
 from tkinter import Tk, messagebox, Button, Label
-
+from time import sleep
 import random
 
 class Game:
@@ -24,6 +24,8 @@ class Game:
          Initialilzing the list elements to False since the buttons are not clicked. '''
 
         self.button_clicked_list = [False]*9
+
+        self.wins = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
 
         # Creating instances of the Button class which would act as buttons .
 
@@ -66,6 +68,8 @@ class Game:
 
     def button_reset_clicked(self):
 
+        self.wins = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+
         # This function will clear the board of all piece and allow for another game to be played
 
         n = len(self.button_clicked_list)
@@ -76,6 +80,7 @@ class Game:
         for x in self.buttons_list:
             x.config(text="", bg='green', fg='black')
 
+        sleep(1)
         return
 
     def button_one_clicked(self):
@@ -99,6 +104,8 @@ class Game:
             if i == 0:
                 return
 
+            self.takingup_list(1, 'X')
+
             # Gets a random number and checks to make sure that it hasn't been clicked already
 
             random_button = random.randint(0, len(self.buttons_list) - 1)
@@ -114,6 +121,8 @@ class Game:
             # Updates the button clicked list with the two new buttons
 
             self.button_clicked_list[random_button] = True
+
+            self.takingup_list(random_button+1, 'O')
 
         else:
 
@@ -141,6 +150,8 @@ class Game:
             if i == 0:
                 return
 
+            self.takingup_list(2, 'X')
+
             # Gets a random number and checks to make sure that it hasn't been clicked already
 
             random_button = random.randint(0, len(self.buttons_list) - 1)
@@ -156,6 +167,8 @@ class Game:
             # Updates the button clicked list with the two new buttons
 
             self.button_clicked_list[random_button] = True
+
+            self.takingup_list(random_button+1, 'O')
 
         else:
 
@@ -183,6 +196,8 @@ class Game:
             if i == 0:
                 return
 
+            self.takingup_list(3, 'X')
+
             # Gets a random number and checks to make sure that it hasn't been clicked already
 
             random_button = random.randint(0, len(self.buttons_list) - 1)
@@ -198,6 +213,8 @@ class Game:
             # Updates the button clicked list with the two new buttons
 
             self.button_clicked_list[random_button] = True
+
+            self.takingup_list(random_button+1, 'O')
 
         else:
 
@@ -225,6 +242,8 @@ class Game:
             if i == 0:
                 return
 
+            self.takingup_list(4, 'X')
+
             # Gets a random number and checks to make sure that it hasn't been clicked already
 
             random_button = random.randint(0, len(self.buttons_list) - 1)
@@ -240,6 +259,8 @@ class Game:
             # Updates the button clicked list with the two new buttons
 
             self.button_clicked_list[random_button] = True
+
+            self.takingup_list(random_button+1, 'O')
 
         else:
 
@@ -267,6 +288,8 @@ class Game:
             if i == 0:
                 return
 
+            self.takingup_list(5, 'X')
+
             # Gets a random number and checks to make sure that it hasn't been clicked already
 
             random_button = random.randint(0, len(self.buttons_list) - 1)
@@ -282,6 +305,8 @@ class Game:
             # Updates the button clicked list with the two new buttons
 
             self.button_clicked_list[random_button] = True
+
+            self.takingup_list(random_button+1, 'O')
 
         else:
 
@@ -309,6 +334,8 @@ class Game:
             if i == 0:
                 return
 
+            self.takingup_list(6, 'X')
+
             # Gets a random number and checks to make sure that it hasn't been clicked already
 
             random_button = random.randint(0, len(self.buttons_list) - 1)
@@ -324,6 +351,8 @@ class Game:
             # Updates the button clicked list with the two new buttons
 
             self.button_clicked_list[random_button] = True
+
+            self.takingup_list(random_button+1, 'O')
 
         else:
 
@@ -351,6 +380,8 @@ class Game:
             if i == 0:
                 return
 
+            self.takingup_list(7, 'X')
+
             # Gets a random number and checks to make sure that it hasn't been clicked already
 
             random_button = random.randint(0, len(self.buttons_list) - 1)
@@ -366,6 +397,8 @@ class Game:
             # Updates the button clicked list with the two new buttons
 
             self.button_clicked_list[random_button] = True
+
+            self.takingup_list(random_button+1, 'O')
 
         else:
 
@@ -393,6 +426,8 @@ class Game:
             if i == 0:
                 return
 
+            self.takingup_list(8, 'X')
+
             # Gets a random number and checks to make sure that it hasn't been clicked already
 
             random_button = random.randint(0, len(self.buttons_list) - 1)
@@ -409,6 +444,7 @@ class Game:
 
             self.button_clicked_list[random_button] = True
 
+            self.takingup_list(random_button+1, 'O')
         else:
 
             messagebox.showwarning("Warning", "Button Eight was already clicked!")
@@ -435,6 +471,8 @@ class Game:
             if i == 0:
                 return
 
+            self.takingup_list(9, 'X')
+
             # Gets a random number and checks to make sure that it hasn't been clicked already
 
             random_button = random.randint(0, len(self.buttons_list) - 1)
@@ -451,10 +489,43 @@ class Game:
 
             self.button_clicked_list[random_button] = True
 
+            self.takingup_list(random_button+1, 'O')
+
         else:
 
             messagebox.showwarning("Warning", "Button Nine was already clicked!")
             return
+
+    def takingup_list(self, num, element):
+        # print(x,o)
+        lenList = len(self.wins)
+        for a in range(lenList):
+            for i in range(3):
+                if self.wins[a][i] == num:
+                    self.wins[a][i] = element
+                elif self.wins[a][i] == num:
+                    self.wins[a][i] = element
+
+        self.checkingWinner()
+
+    def checkingWinner(self):
+        # self.wins=[[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+
+        for a in self.wins:
+            # quantity = 
+            if a.count('X') == 3:
+                self.message_fineshed('win', 'warning')
+                # messagebox.askretrycancel("Success", "You win!", icon='success')
+            if a.count('O') == 3:
+                self.message_fineshed('lose', 'error')
+                # messagebox.askretrycancel("Game Over", "You lose!", icon='error')
+        # pass
+    def message_fineshed(self, msg, icon):
+        if messagebox.askretrycancel("Game Over", f'You {msg}', icon=icon) == True:
+            self.button_reset_clicked()
+        else:
+            pass
+            # Button destroy
 
 
 # Instantiation
